@@ -1,4 +1,3 @@
-
 def inversion(arr,inv):
     if len(arr)>1:
         mid = len(arr)//2
