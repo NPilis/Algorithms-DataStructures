@@ -1,8 +1,8 @@
 import numpy as np
 from typing import Tuple
 
+# Forbidden path as infinity
 INF = np.inf
-
 
 class CostMatrix:
 
@@ -87,6 +87,13 @@ class CostMatrix:
 
         return pairs_indexes
 
+    # Removes row and column at indexes and blocks reverse way
+    def deleteAndBan(self,row,col):
+
+        self.costMatrix[col][row] = INF
+        self.costMatrix = np.delete(self.costMatrix,row,0)
+        self.costMatrix = np.delete(self.costMatrix,col,1)
+
 
 class TSP_Solver:
 
@@ -101,14 +108,3 @@ testMatrix = np.array([[0, 10, 8, 19, 12],
                        [12, 3, 2, 7, 0]], dtype=np.float)
 
 np.fill_diagonal(testMatrix, INF)
-
-mat = CostMatrix(testMatrix)
-mat.reduceRows()
-mat.reduceCols()
-mat.printMatrix()
-print(mat.checkForZeros())
-
-
-
-mat.printMatrix()
-print(mat.findPairsWithZero())
